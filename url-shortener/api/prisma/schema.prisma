@@ -1,0 +1,42 @@
+// This is your Prisma schema file.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  links     Link[]
+}
+
+model Link {
+  id          Int       @id @default(autoincrement())
+  shortCode   String    @unique
+  originalUrl String
+  password    String?
+  expires     DateTime?
+  clicks      Int       @default(0)
+  userId      Int?
+  user        User?     @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
+  clicksLog   Click[]
+}
+
+model Click {
+  id        Int      @id @default(autoincrement())
+  linkId    Int
+  ip        String?
+  country   String?
+  referrer  String?
+  userAgent String?
+  timestamp DateTime @default(now())
+  link      Link     @relation(fields: [linkId], references: [id])
+}
