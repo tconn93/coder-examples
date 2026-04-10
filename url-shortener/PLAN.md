@@ -6,7 +6,7 @@ Build a full-featured URL shortening service with analytics.
 ## Tech Stack
 - Backend: Node.js + Express or FastAPI (Python)
 - Database: PostgreSQL
-- Frontend: React + TypeScript + Tailwind
+- Frontend: VITE/React-TypeScript + Tailwind
 - Caching: Redis (optional)
 
 ## Core Features
