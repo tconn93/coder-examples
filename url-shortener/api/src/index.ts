@@ -4,14 +4,13 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { nanoid } from 'nanoid';
-import { PrismaClient, Link } from './generated/prisma-client';
+import { PrismaClient } from '@prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 
 const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL!,
-    },
-  },
+  adapter: new PrismaPg({
+    connectionString: process.env.DATABASE_URL!,
+  }),
 });
 
 const app = express();
@@ -68,7 +67,7 @@ app.get('/api/urls', async (req: Request, res: Response) => {
         createdAt: 'desc',
       },
     });
-    const list = dbLinks.map((l: Link) => ({
+    const list = dbLinks.map((l: any) => ({
       shortCode: l.shortCode,
       originalUrl: l.originalUrl,
       clicks: l.clicks,
@@ -82,7 +81,7 @@ app.get('/api/urls', async (req: Request, res: Response) => {
 });
 
 app.delete('/api/urls/:shortCode', async (req: Request, res: Response) => {
-  const { shortCode } = req.params;
+  const shortCode = req.params.shortCode as string;
   try {
     await prisma.link.delete({
       where: { shortCode },
@@ -98,7 +97,7 @@ app.delete('/api/urls/:shortCode', async (req: Request, res: Response) => {
 });
 
 app.get('/:shortCode', async (req: Request, res: Response) => {
-  const { shortCode } = req.params;
+  const shortCode = req.params.shortCode as string;
   try {
     const link = await prisma.link.findUnique({
       where: { shortCode },

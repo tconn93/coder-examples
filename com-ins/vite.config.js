@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var vite_1 = require("vite");
+nimport;
+react;
+from;
+'@vitejs/plugin-react';
+nimport;
+tailwindcss;
+from;
+'@tailwindcss/vite';
+n;
+nexport;
+(0, vite_1.defineConfig)({ n: n, plugins: [tailwindcss(), react()], n: n });

@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_router_dom_1 = require("react-router-dom");
+n;
+nimport;
+Login;
+from;
+'./pages/Login';
+nimport;
+Dashboard;
+from;
+'./pages/Dashboard';
+nimport;
+QuoteForm;
+from;
+'./pages/QuoteForm';
+n;
+nfunction;
+App();
+{
+    n;
+    return ();
+    n < div;
+    className = "min-h-screen bg-gray-50" > ;
+    n;
+    n < react_router_dom_1.Route;
+    path = "/login";
+    element = {} < Login /  > ;
+}
+/>\n        <Route path="/;
+" element={<Dashboard />} />\n        <Route path=" / quote / ;
+quoteId ? " element={<QuoteForm />} />\n        <Route path=" * " element={<Navigate to=" / " replace />} />\n      </Routes>\n    </div>\n  );\n}\n\nexport default App;\n : ;
